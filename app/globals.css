@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sun: #ffd93d;
+  --orange: #ff9f43;
+  --orange-deep: #e67700;
+  --mint: #6bcb77;
+  --leaf: #2d8a57;
+  --cream: #fff8e7;
+  --ink: #2b2118;
+  --background: #fff8e7;
+  --foreground: #2b2118;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-sun: var(--sun);
+  --color-orange: var(--orange);
+  --color-orange-deep: var(--orange-deep);
+  --color-mint: var(--mint);
+  --color-leaf: var(--leaf);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-nunito);
+  --font-display: var(--font-fredoka);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-nunito), "Segoe UI", sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-fredoka), var(--font-nunito), sans-serif;
+}
+
+.app-bg {
+  background:
+    radial-gradient(ellipse at 10% 0%, rgba(255, 217, 61, 0.55), transparent 45%),
+    radial-gradient(ellipse at 90% 10%, rgba(107, 203, 119, 0.28), transparent 40%),
+    linear-gradient(180deg, #fff3c4 0%, #fff8e7 40%, #e8f8ee 100%);
+}
+
+.safe-bottom {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.85;
+  }
+}
+
+.confetti-piece {
+  animation-name: confetti-fall;
+  animation-timing-function: cubic-bezier(0.25, 0.7, 0.4, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes toast-in {
+  from {
+    transform: translateY(-12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.toast-pop {
+  animation: toast-in 0.25s ease-out;
+}
+
+@keyframes star-bounce {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.star-pop {
+  animation: star-bounce 0.35s ease-out;
 }
