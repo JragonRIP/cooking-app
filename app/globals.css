@@ -47,6 +47,19 @@ body {
   padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
 }
 
+.discover-feed {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.discover-slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: 100%;
+  min-height: 100%;
+}
+
 @keyframes confetti-fall {
   0% {
     transform: translateY(-10vh) rotate(0deg);

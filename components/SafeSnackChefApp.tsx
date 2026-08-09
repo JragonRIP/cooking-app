@@ -32,7 +32,11 @@ function AppShell() {
   return (
     <div className="app-bg flex min-h-dvh flex-col">
       <TopBar title={title} />
-      <main className="mx-auto flex w-full flex-1 flex-col overflow-y-auto">
+      <main
+        className={`mx-auto flex w-full max-w-lg min-h-0 flex-1 flex-col ${
+          tab === "discover" ? "overflow-hidden" : "overflow-y-auto"
+        }`}
+      >
         {tab === "discover" ? <DiscoverScreen /> : null}
         {tab === "saved" ? <SavedScreen /> : null}
         {tab === "cooking" ? <CookingTabScreen /> : null}

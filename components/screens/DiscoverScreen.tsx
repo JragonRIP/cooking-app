@@ -1,11 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { CookTimeBadge, RecipePlaceholder, SafetyBadge } from "@/components/ui";
 import { useApp } from "@/lib/app-context";
 import { RECIPES } from "@/lib/recipes";
 import { recipeMatchesQuery } from "@/lib/search";
 import type { Recipe } from "@/lib/types";
+
+function shuffleRecipes(recipes: Recipe[]): Recipe[] {
+  const next = [...recipes];
+  for (let i = next.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [next[i], next[j]] = [next[j], next[i]];
+  }
+  return next;
+}
 
 function DiscoverCard({ recipe }: { recipe: Recipe }) {
   const { isSaved, toggleSave, startCooking } = useApp();
@@ -13,9 +22,9 @@ function DiscoverCard({ recipe }: { recipe: Recipe }) {
   const [pop, setPop] = useState(false);
 
   return (
-    <article className="flex h-[78vh] w-full shrink-0 flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_12px_32px_rgba(60,40,10,0.15)]">
-      <RecipePlaceholder recipe={recipe} className="min-h-[42%] flex-1" large />
-      <div className="flex flex-col gap-3 p-4 pb-5">
+    <article className="flex h-full w-full max-w-lg flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_12px_32px_rgba(60,40,10,0.15)]">
+      <RecipePlaceholder recipe={recipe} className="min-h-0 flex-[1.15]" large />
+      <div className="flex shrink-0 flex-col gap-2.5 p-4 pb-5">
         <h2 className="font-display text-2xl font-bold leading-tight text-ink">
           {recipe.title}
         </h2>
@@ -57,12 +66,20 @@ function DiscoverCard({ recipe }: { recipe: Recipe }) {
 
 export function DiscoverScreen() {
   const { searchQuery } = useApp();
-  const q = searchQuery.trim().toLowerCase();
-  const list = RECIPES.filter((r) => recipeMatchesQuery(r, q));
+  const [deck, setDeck] = useState<Recipe[]>(RECIPES);
+
+  useEffect(() => {
+    setDeck(shuffleRecipes(RECIPES));
+  }, []);
+
+  const list = useMemo(() => {
+    const q = searchQuery.trim();
+    return deck.filter((r) => recipeMatchesQuery(r, q));
+  }, [deck, searchQuery]);
 
   if (list.length === 0) {
     return (
-      <div className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+      <div className="flex h-full flex-1 flex-col items-center justify-center px-6 text-center">
         <p className="text-4xl">🔎</p>
         <p className="mt-3 font-display text-xl font-bold text-ink">No recipes found</p>
         <p className="mt-1 text-ink/70">Try a different search word.</p>
@@ -71,9 +88,17 @@ export function DiscoverScreen() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-lg flex-col gap-5 px-4 py-4">
+    <div
+      className="discover-feed h-full min-h-0 w-full overflow-y-auto overscroll-y-contain"
+      aria-label="Discover recipe feed"
+    >
       {list.map((recipe) => (
-        <DiscoverCard key={recipe.id} recipe={recipe} />
+        <section
+          key={recipe.id}
+          className="discover-slide mx-auto flex h-full w-full max-w-lg shrink-0 snap-start snap-always items-stretch px-4 py-3"
+        >
+          <DiscoverCard recipe={recipe} />
+        </section>
       ))}
     </div>
   );
