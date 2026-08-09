@@ -44,7 +44,7 @@ export function StarRating({
           disabled={!onChange}
           onClick={() => onChange?.(n)}
           className={`leading-none transition-transform ${
-            onChange ? "cursor-pointer active:scale-125" : "cursor-default"
+            onChange ? "cursor-pointer active:scale-95" : "cursor-default"
           } ${n <= value ? "opacity-100" : "opacity-30"}`}
           aria-label={`${n} stars`}
         >
@@ -60,7 +60,10 @@ export function RecipePlaceholder({
   className = "",
   large = false,
 }: {
-  recipe: Pick<Recipe, "emoji" | "placeholderColor" | "pattern" | "title">;
+  recipe: Pick<
+    Recipe,
+    "emoji" | "placeholderColor" | "pattern" | "title" | "imageSrc"
+  >;
   className?: string;
   large?: boolean;
 }) {
@@ -69,19 +72,25 @@ export function RecipePlaceholder({
       className={`relative flex items-center justify-center overflow-hidden ${className}`}
       style={{
         backgroundColor: recipe.placeholderColor,
-        backgroundImage: recipe.pattern,
+        backgroundImage: recipe.imageSrc ? undefined : recipe.pattern,
       }}
       role="img"
-      aria-label={`${recipe.title} placeholder image`}
+      aria-label={`${recipe.title} illustration`}
     >
-      <span
-        className={`drop-shadow-sm select-none ${large ? "text-7xl sm:text-8xl" : "text-5xl"}`}
-      >
-        {recipe.emoji}
-      </span>
-      <span className="absolute bottom-2 right-2 rounded-full bg-white/70 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-ink/60">
-        Photo soon
-      </span>
+      {recipe.imageSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={recipe.imageSrc}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      ) : (
+        <span
+          className={`drop-shadow-sm select-none ${large ? "text-7xl sm:text-8xl" : "text-5xl"}`}
+        >
+          {recipe.emoji}
+        </span>
+      )}
     </div>
   );
 }

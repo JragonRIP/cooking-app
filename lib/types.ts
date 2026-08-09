@@ -27,6 +27,8 @@ export interface Recipe {
   placeholderColor: string;
   pattern: string;
   suggestedCookbook: CookbookId;
+  /** Simple illustration in /public/recipes */
+  imageSrc?: string;
   ingredients: Ingredient[];
   steps: Step[];
 }
