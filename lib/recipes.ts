@@ -1,5 +1,6 @@
 import type { Recipe } from "./types";
 import { MORE_RECIPES } from "./more-recipes";
+import { MORE_RECIPES_BATCH3 } from "./more-recipes-batch3";
 
 /** Mini-chef recipes for Discover */
 const BASE_RECIPES: Recipe[] = [
@@ -1241,7 +1242,11 @@ const BASE_RECIPES: Recipe[] = [
   },
 ];
 
-export const RECIPES: Recipe[] = [...BASE_RECIPES, ...MORE_RECIPES];
+export const RECIPES: Recipe[] = [
+  ...BASE_RECIPES,
+  ...MORE_RECIPES,
+  ...MORE_RECIPES_BATCH3,
+];
 
 export function getRecipeById(id: string): Recipe | undefined {
   return RECIPES.find((r) => r.id === id);
