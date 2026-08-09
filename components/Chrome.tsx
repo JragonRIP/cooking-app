@@ -16,7 +16,7 @@ export function BottomNav() {
 
   return (
     <nav
-      className="safe-bottom sticky bottom-0 z-40 border-t-2 border-sun/60 bg-white/95 backdrop-blur-md"
+      className="safe-bottom z-40 w-full border-t-2 border-sun/60 bg-white/95 backdrop-blur-md"
       aria-label="Main"
     >
       <ul className="mx-auto grid max-w-lg grid-cols-4 gap-1 px-2 py-2">
@@ -27,7 +27,7 @@ export function BottomNav() {
               <button
                 type="button"
                 onClick={() => setTab(item.id)}
-                className={`relative flex min-h-16 w-full flex-col items-center justify-center rounded-2xl px-1 py-2 text-xs font-bold transition-all ${
+                className={`relative flex min-h-14 w-full flex-col items-center justify-center rounded-2xl px-1 py-2 text-xs font-bold transition-all sm:min-h-16 ${
                   active
                     ? "bg-sun text-ink shadow-sm scale-[1.02]"
                     : "text-ink/70 hover:bg-sun/30"
@@ -52,7 +52,7 @@ export function TopBar({ title }: { title: string }) {
   const { searchOpen, setSearchOpen, searchQuery, setSearchQuery } = useApp();
 
   return (
-    <header className="sticky top-0 z-30 border-b border-sun/40 bg-gradient-to-b from-sun/90 to-sun/50 px-4 pb-3 pt-3 backdrop-blur-sm">
+    <header className="z-30 border-b border-sun/40 bg-gradient-to-b from-sun/90 to-sun/50 px-4 pb-3 pt-3 backdrop-blur-sm">
       <div className="mx-auto flex max-w-lg items-center gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <span

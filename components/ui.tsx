@@ -82,7 +82,8 @@ export function RecipePlaceholder({
         <img
           src={recipe.imageSrc}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-contain p-2"
+          draggable={false}
         />
       ) : (
         <span

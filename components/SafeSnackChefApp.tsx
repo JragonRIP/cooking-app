@@ -30,8 +30,10 @@ function AppShell() {
       : TITLES[tab];
 
   return (
-    <div className="app-bg flex min-h-dvh flex-col">
-      <TopBar title={title} />
+    <div className="app-bg flex h-dvh max-h-dvh flex-col overflow-hidden">
+      <div className="shrink-0">
+        <TopBar title={title} />
+      </div>
       <main
         className={`mx-auto flex w-full max-w-lg min-h-0 flex-1 flex-col ${
           tab === "discover" ? "overflow-hidden" : "overflow-y-auto"
@@ -42,7 +44,9 @@ function AppShell() {
         {tab === "cooking" ? <CookingTabScreen /> : null}
         {tab === "cookbook" ? <CookbookScreen /> : null}
       </main>
-      <BottomNav />
+      <div className="shrink-0">
+        <BottomNav />
+      </div>
       <CookingMode />
       <ConfettiBurst />
       <ToastBanner />
