@@ -186,40 +186,42 @@ export function CookingMode() {
   }
 
   return (
-    <div className="fixed inset-0 z-[55] flex flex-col bg-cream">
-      <header className="flex items-center gap-2 border-b border-sun/40 bg-sun/70 px-3 py-3">
+    <div className="fixed inset-0 z-[55] flex h-dvh max-h-dvh flex-col overflow-hidden bg-cream supports-[height:100svh]:h-svh">
+      <header className="safe-top flex shrink-0 items-center gap-2 border-b border-sun/40 bg-sun/70 px-2 py-2 short:py-1.5 sm:px-3 sm:py-3">
         <button
           type="button"
           onClick={exitCookingMode}
-          className="min-h-12 min-w-12 rounded-2xl bg-white text-lg font-bold shadow-sm"
+          className="min-h-10 min-w-10 rounded-xl bg-white text-lg font-bold shadow-sm short:min-h-9 short:min-w-9 sm:min-h-12 sm:min-w-12 sm:rounded-2xl"
           aria-label="Exit cooking mode"
         >
           ←
         </button>
         <div className="min-w-0 flex-1">
-          <p className="truncate font-display text-lg font-bold text-ink">
+          <p className="truncate font-display text-base font-bold text-ink short:text-sm sm:text-lg">
             {recipe.title}
           </p>
-          <p className="text-sm font-semibold text-ink/65">{headerSub}</p>
+          <p className="truncate text-xs font-semibold text-ink/65 short:text-[11px] sm:text-sm">
+            {headerSub}
+          </p>
         </div>
       </header>
 
-      <div className="mx-auto flex w-full max-w-lg flex-1 flex-col overflow-y-auto px-4 py-4">
+      <div className="mx-auto flex w-full max-w-lg min-h-0 flex-1 flex-col overflow-y-auto px-3 py-3 short:px-2 short:py-2 sm:px-4 sm:py-4">
         {onServings ? (
           <>
-            <h2 className="font-display text-2xl font-bold text-ink">
+            <h2 className="font-display text-xl font-bold text-ink short:text-lg sm:text-2xl">
               How many people?
             </h2>
-            <p className="mt-1 text-ink/70">
+            <p className="mt-1 text-sm text-ink/70 short:text-xs sm:text-base">
               We&apos;ll scale the ingredients so you can cook for more friends!
             </p>
-            <div className="mt-6 grid grid-cols-4 gap-3">
+            <div className="mt-4 grid grid-cols-4 gap-2 short:gap-1.5 sm:mt-6 sm:gap-3">
               {SERVING_OPTIONS.map((n) => (
                 <button
                   key={n}
                   type="button"
                   onClick={() => updateCooking({ servings: n })}
-                  className={`flex min-h-16 flex-col items-center justify-center rounded-2xl border-2 text-xl font-bold ${
+                  className={`flex min-h-12 flex-col items-center justify-center rounded-xl border-2 text-lg font-bold short:min-h-11 short:text-base sm:min-h-16 sm:rounded-2xl sm:text-xl ${
                     servings === n
                       ? "border-orange bg-orange text-white shadow-md"
                       : "border-sun/50 bg-white text-ink"
@@ -229,7 +231,7 @@ export function CookingMode() {
                 </button>
               ))}
             </div>
-            <p className="mt-4 text-center text-base font-bold text-ink/70">
+            <p className="mt-3 text-center text-sm font-bold text-ink/70 sm:mt-4 sm:text-base">
               Making{" "}
               <span className="text-orange-deep">
                 {servings} {servings === 1 ? "serving" : "servings"}
@@ -240,14 +242,14 @@ export function CookingMode() {
 
         {onIngredients ? (
           <>
-            <h2 className="font-display text-2xl font-bold text-ink">
+            <h2 className="font-display text-xl font-bold text-ink short:text-lg sm:text-2xl">
               Check your ingredients
             </h2>
-            <p className="mt-1 text-ink/70">
+            <p className="mt-1 text-sm text-ink/70 short:text-xs sm:text-base">
               Amounts are for {servings} {servings === 1 ? "serving" : "servings"}.
               Tap each one when you have it ready.
             </p>
-            <ul className="mt-4 space-y-3">
+            <ul className="mt-3 space-y-2 short:space-y-1.5 sm:mt-4 sm:space-y-3">
               {scaledIngredients.map((ing) => {
                 const checked = session.checkedIngredients.includes(ing.id);
                 return (
@@ -255,14 +257,14 @@ export function CookingMode() {
                     <button
                       type="button"
                       onClick={() => toggleIngredient(ing.id)}
-                      className={`flex min-h-14 w-full items-center gap-3 rounded-2xl border-2 px-4 text-left text-lg font-bold ${
+                      className={`flex min-h-12 w-full items-center gap-2 rounded-xl border-2 px-3 text-left text-base font-bold short:min-h-11 short:text-sm sm:min-h-14 sm:gap-3 sm:rounded-2xl sm:px-4 sm:text-lg ${
                         checked
                           ? "border-mint bg-mint/25 text-leaf"
                           : "border-sun/50 bg-white text-ink"
                       }`}
                     >
-                      <span className="text-2xl">{checked ? "✅" : "⬜"}</span>
-                      {ing.name}
+                      <span className="text-xl sm:text-2xl">{checked ? "✅" : "⬜"}</span>
+                      <span className="min-w-0 flex-1 break-words">{ing.name}</span>
                     </button>
                   </li>
                 );
@@ -273,22 +275,22 @@ export function CookingMode() {
 
         {!onServings && !onIngredients && step ? (
           <>
-            <div className="rounded-3xl bg-white p-5 shadow-md">
-              <p className="text-xl font-bold leading-relaxed text-ink">
+            <div className="rounded-2xl bg-white p-3 shadow-md short:p-2.5 sm:rounded-3xl sm:p-5">
+              <p className="text-base font-bold leading-relaxed text-ink short:text-sm sm:text-xl">
                 {step.instruction}
               </p>
             </div>
 
             {stepIngredients.length > 0 ? (
-              <div className="mt-4">
-                <p className="text-sm font-bold uppercase tracking-wide text-ink/50">
+              <div className="mt-3 sm:mt-4">
+                <p className="text-xs font-bold uppercase tracking-wide text-ink/50 sm:text-sm">
                   For this step
                 </p>
-                <ul className="mt-2 space-y-2">
+                <ul className="mt-2 space-y-1.5 sm:space-y-2">
                   {stepIngredients.map((ing) => (
                     <li
                       key={ing.id}
-                      className="rounded-2xl bg-sun/30 px-4 py-3 text-base font-bold text-ink"
+                      className="rounded-xl bg-sun/30 px-3 py-2 text-sm font-bold text-ink sm:rounded-2xl sm:px-4 sm:py-3 sm:text-base"
                     >
                       {ing.name}
                     </li>
@@ -308,35 +310,37 @@ export function CookingMode() {
         ) : null}
       </div>
 
-      <div className="safe-bottom border-t border-sun/40 bg-white px-4 pt-3 pb-4">
+      <div className="safe-bottom shrink-0 border-t border-sun/40 bg-white px-3 pt-2 pb-3 short:pt-1.5 short:pb-2 sm:px-4 sm:pt-3 sm:pb-4">
         <div className="mx-auto max-w-lg">
           {!onServings && !onIngredients && step?.needsAdult ? (
-            <div className="mb-3 rounded-2xl bg-orange/20 px-4 py-3 text-center">
-              <p className="text-base font-bold text-orange-deep">
+            <div className="mb-2 rounded-xl bg-orange/20 px-3 py-2 text-center short:mb-1.5 short:py-1.5 sm:mb-3 sm:rounded-2xl sm:px-4 sm:py-3">
+              <p className="text-sm font-bold text-orange-deep short:text-xs sm:text-base">
                 ⚠️ Ask an Adult Helper for help!
               </p>
               {step.adultReason ? (
-                <p className="mt-1 text-sm text-orange-deep/80">{step.adultReason}</p>
+                <p className="mt-0.5 text-xs text-orange-deep/80 sm:mt-1 sm:text-sm">
+                  {step.adultReason}
+                </p>
               ) : null}
             </div>
           ) : null}
 
-          <div className="flex gap-3">
+          <div className="flex gap-2 sm:gap-3">
             <button
               type="button"
               onClick={goBack}
               disabled={onServings}
-              className="min-h-14 min-w-[6.5rem] rounded-2xl bg-sun/50 text-base font-bold text-ink disabled:opacity-40"
+              className="min-h-11 min-w-[5rem] rounded-xl bg-sun/50 text-sm font-bold text-ink disabled:opacity-40 short:min-h-10 sm:min-h-14 sm:min-w-[6.5rem] sm:rounded-2xl sm:text-base"
             >
               ← Back
             </button>
             <button
               type="button"
               onClick={goNext}
-              className="min-h-14 flex-1 rounded-2xl bg-orange text-lg font-bold text-white shadow-md active:scale-[0.98]"
+              className="min-h-11 flex-1 rounded-xl bg-orange px-2 text-sm font-bold text-white shadow-md active:scale-[0.98] short:min-h-10 short:text-xs sm:min-h-14 sm:rounded-2xl sm:text-lg"
             >
               {onServings
-                ? "Next: Ingredients →"
+                ? "Ingredients →"
                 : onIngredients
                   ? "Start cooking →"
                   : isLastStep

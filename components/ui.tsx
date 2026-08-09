@@ -5,21 +5,21 @@ import type { Recipe, SafetyLevel } from "@/lib/types";
 export function SafetyBadge({ safety }: { safety: SafetyLevel }) {
   if (safety === "kid-solo") {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-mint/30 px-3 py-1 text-sm font-bold text-leaf">
+      <span className="inline-flex items-center gap-1 rounded-full bg-mint/30 px-2 py-0.5 text-[11px] font-bold text-leaf short:text-[10px] sm:px-3 sm:py-1 sm:text-sm">
         🟢 Kid Solo
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-orange/25 px-3 py-1 text-sm font-bold text-orange-deep">
-      🟧 Adult Helper Needed!
+    <span className="inline-flex items-center gap-1 rounded-full bg-orange/25 px-2 py-0.5 text-[11px] font-bold text-orange-deep short:text-[10px] sm:px-3 sm:py-1 sm:text-sm">
+      🟧 Adult Helper
     </span>
   );
 }
 
 export function CookTimeBadge({ mins }: { mins: number }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-3 py-1 text-sm font-bold text-ink shadow-sm">
+    <span className="inline-flex items-center gap-1 rounded-full bg-white/80 px-2 py-0.5 text-[11px] font-bold text-ink shadow-sm short:text-[10px] sm:px-3 sm:py-1 sm:text-sm">
       ⏱️ {mins} mins
     </span>
   );

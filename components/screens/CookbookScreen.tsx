@@ -26,8 +26,8 @@ function NotesEditor({
   const [rating, setRating] = useState(initialRating || 1);
 
   return (
-    <div className="fixed inset-0 z-[60] flex items-end justify-center bg-ink/40 p-4 sm:items-center">
-      <div className="w-full max-w-md rounded-3xl bg-white p-5 shadow-xl">
+    <div className="fixed inset-0 z-[60] flex items-end justify-center overflow-y-auto bg-ink/40 p-3 short:p-2 sm:items-center sm:p-4">
+      <div className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-4 shadow-xl short:p-3 sm:p-5">
         <h2 className="font-display text-xl font-bold text-ink">Chef&apos;s Notes</h2>
         <p className="mt-1 text-sm text-ink/60">Edit anytime — what did you love?</p>
         <div className="mt-4">
@@ -163,7 +163,7 @@ export function CookbookScreen() {
   const books = COOKBOOKS.filter((b) => !q || b.title.toLowerCase().includes(q));
 
   return (
-    <div className="mx-auto grid w-full max-w-lg grid-cols-2 gap-4 px-4 py-4">
+    <div className="mx-auto grid w-full max-w-lg grid-cols-2 gap-2 px-3 py-3 short:gap-1.5 short:px-2 short:py-2 sm:gap-4 sm:px-4 sm:py-4">
       {books.map((book) => {
         const count = state.cookbooks[book.id].length;
         return (

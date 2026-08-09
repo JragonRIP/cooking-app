@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@custom-variant short (@media (max-height: 720px));
+@custom-variant narrow (@media (max-width: 390px));
+
 :root {
   --sun: #ffd93d;
   --orange: #ff9f43;
@@ -26,17 +29,20 @@
   --font-display: var(--font-fredoka);
 }
 
+html {
+  height: 100%;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-nunito), "Segoe UI", sans-serif;
   overflow: hidden;
   height: 100%;
-}
-
-html {
-  height: 100%;
-  overflow: hidden;
+  min-height: 100dvh;
+  min-height: 100svh;
 }
 
 .font-display {
@@ -50,8 +56,12 @@ html {
     linear-gradient(180deg, #fff3c4 0%, #fff8e7 40%, #e8f8ee 100%);
 }
 
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
 .safe-bottom {
-  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  padding-bottom: max(0.35rem, env(safe-area-inset-bottom));
 }
 
 .discover-feed {

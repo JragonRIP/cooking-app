@@ -61,22 +61,22 @@ export function StepTimer({
   }
 
   return (
-    <div className="mt-4 rounded-3xl bg-white p-4 shadow-md">
-      <p className="text-sm font-bold uppercase tracking-wide text-ink/50">
+    <div className="mt-3 rounded-2xl bg-white p-3 shadow-md short:mt-2 short:p-2.5 sm:mt-4 sm:rounded-3xl sm:p-4">
+      <p className="text-xs font-bold uppercase tracking-wide text-ink/50 sm:text-sm">
         {label || "Step timer"}
       </p>
-      <p className="mt-2 font-display text-5xl font-bold tabular-nums text-ink">
+      <p className="mt-1 font-display text-4xl font-bold tabular-nums text-ink short:text-3xl sm:mt-2 sm:text-5xl">
         {formatTimer(remaining)}
       </p>
       {done ? (
-        <p className="mt-2 text-base font-bold text-leaf">Time&apos;s up! ✅</p>
+        <p className="mt-1 text-sm font-bold text-leaf sm:mt-2 sm:text-base">Time&apos;s up! ✅</p>
       ) : null}
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-2 sm:mt-4">
         {!done ? (
           <button
             type="button"
             onClick={() => setRunning((v) => !v)}
-            className="min-h-12 flex-1 rounded-2xl bg-mint px-4 text-base font-bold text-ink"
+            className="min-h-10 flex-1 rounded-xl bg-mint px-3 text-sm font-bold text-ink short:min-h-9 sm:min-h-12 sm:rounded-2xl sm:px-4 sm:text-base"
           >
             {running ? "Pause" : remaining < seconds ? "Resume" : "Start timer"}
           </button>
@@ -88,7 +88,7 @@ export function StepTimer({
               setDone(false);
               setRunning(false);
             }}
-            className="min-h-12 flex-1 rounded-2xl bg-sun/60 px-4 text-base font-bold text-ink"
+            className="min-h-10 flex-1 rounded-xl bg-sun/60 px-3 text-sm font-bold text-ink short:min-h-9 sm:min-h-12 sm:rounded-2xl sm:px-4 sm:text-base"
           >
             Reset
           </button>
@@ -99,7 +99,7 @@ export function StepTimer({
             setSkipped(true);
             setRunning(false);
           }}
-          className="min-h-12 rounded-2xl border-2 border-ink/15 bg-cream px-4 text-base font-bold text-ink/70"
+          className="min-h-10 rounded-xl border-2 border-ink/15 bg-cream px-3 text-sm font-bold text-ink/70 short:min-h-9 sm:min-h-12 sm:rounded-2xl sm:px-4 sm:text-base"
         >
           Skip timer
         </button>

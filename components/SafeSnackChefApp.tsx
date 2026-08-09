@@ -30,7 +30,7 @@ function AppShell() {
       : TITLES[tab];
 
   return (
-    <div className="app-bg flex h-dvh max-h-dvh flex-col overflow-hidden">
+    <div className="app-bg flex h-dvh max-h-dvh flex-col overflow-hidden supports-[height:100svh]:h-svh supports-[height:100svh]:max-h-svh">
       <div className="shrink-0">
         <TopBar title={title} />
       </div>

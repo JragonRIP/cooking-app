@@ -22,24 +22,24 @@ function DiscoverCard({ recipe }: { recipe: Recipe }) {
   const [pop, setPop] = useState(false);
 
   return (
-    <article className="flex h-full w-full flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_12px_32px_rgba(60,40,10,0.15)]">
+    <article className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[22px] bg-white shadow-[0_12px_32px_rgba(60,40,10,0.15)] short:rounded-[18px]">
       <RecipePlaceholder
         recipe={recipe}
-        className="relative min-h-[42%] flex-1 basis-0"
+        className="relative min-h-[7.5rem] flex-[1.1] basis-0 short:min-h-[5.5rem] short:flex-1"
         large
       />
-      <div className="flex shrink-0 flex-col gap-2 p-3 pb-4 sm:gap-2.5 sm:p-4">
-        <h2 className="font-display text-xl font-bold leading-tight text-ink sm:text-2xl">
+      <div className="flex min-h-0 shrink-0 flex-col gap-1.5 p-2.5 short:gap-1 short:p-2 sm:gap-2.5 sm:p-4">
+        <h2 className="font-display text-lg font-bold leading-tight text-ink short:text-base sm:text-2xl">
           {recipe.title}
         </h2>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-1.5 short:gap-1">
           <CookTimeBadge mins={recipe.cookTimeMins} />
           <SafetyBadge safety={recipe.safety} />
         </div>
-        <div className="line-clamp-3 rounded-2xl bg-cream px-3 py-2.5 text-sm leading-snug text-ink/85 sm:text-base">
+        <div className="line-clamp-2 rounded-xl bg-cream px-2.5 py-2 text-xs leading-snug text-ink/85 short:line-clamp-1 short:py-1.5 sm:line-clamp-3 sm:rounded-2xl sm:px-3 sm:py-2.5 sm:text-base">
           {recipe.description}
         </div>
-        <div className="mt-0.5 flex gap-3">
+        <div className="mt-0.5 flex gap-2 short:gap-1.5 sm:gap-3">
           <button
             type="button"
             onClick={() => {
@@ -47,20 +47,20 @@ function DiscoverCard({ recipe }: { recipe: Recipe }) {
               toggleSave(recipe.id);
               window.setTimeout(() => setPop(false), 400);
             }}
-            className={`star-btn flex min-h-12 min-w-[6.5rem] flex-1 items-center justify-center gap-2 rounded-2xl border-2 border-sun bg-sun/40 text-base font-bold text-ink shadow-sm active:scale-95 sm:min-h-14 sm:text-lg ${
+            className={`star-btn flex min-h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl border-2 border-sun bg-sun/40 text-sm font-bold text-ink shadow-sm active:scale-95 short:min-h-10 short:rounded-lg short:text-xs sm:min-h-14 sm:gap-2 sm:rounded-2xl sm:text-lg ${
               pop ? "star-pop" : ""
             } ${saved ? "bg-sun" : ""}`}
             aria-pressed={saved}
           >
-            <span className="text-2xl">{saved ? "⭐" : "☆"}</span>
+            <span className="text-xl short:text-lg sm:text-2xl">{saved ? "⭐" : "☆"}</span>
             {saved ? "Saved" : "Save"}
           </button>
           <button
             type="button"
             onClick={() => startCooking(recipe.id)}
-            className="flex min-h-12 flex-[1.4] items-center justify-center gap-2 rounded-2xl bg-orange text-base font-bold text-white shadow-md active:scale-95 sm:min-h-14 sm:text-lg"
+            className="flex min-h-11 min-w-0 flex-[1.35] items-center justify-center gap-1.5 rounded-xl bg-orange px-2 text-sm font-bold text-white shadow-md active:scale-95 short:min-h-10 short:rounded-lg short:text-xs sm:min-h-14 sm:rounded-2xl sm:text-lg"
           >
-            👨‍🍳 Cook This!
+            <span className="narrow:hidden">👨‍🍳 </span>Cook!
           </button>
         </div>
       </div>
@@ -95,7 +95,7 @@ export function DiscoverScreen() {
     <div className="discover-feed" aria-label="Discover recipe feed">
       {list.map((recipe) => (
         <section key={recipe.id} className="discover-slide">
-          <div className="mx-auto flex h-full w-full max-w-lg items-stretch px-3 py-2">
+          <div className="mx-auto flex h-full min-h-0 w-full max-w-lg items-stretch px-2 py-1.5 short:px-1.5 short:py-1 sm:px-3 sm:py-2">
             <DiscoverCard recipe={recipe} />
           </div>
         </section>
