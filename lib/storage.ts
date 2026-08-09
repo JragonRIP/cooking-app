@@ -20,7 +20,13 @@ export function loadState(): AppPersistState {
         ...parsed.reviews,
       },
       savedIds: Array.isArray(parsed.savedIds) ? parsed.savedIds : [],
-      cooking: parsed.cooking ?? null,
+      cooking: parsed.cooking
+        ? {
+            ...parsed.cooking,
+            servings: parsed.cooking.servings ?? 1,
+            stepIndex: parsed.cooking.stepIndex ?? -2,
+          }
+        : null,
     };
   } catch {
     return EMPTY_STATE;

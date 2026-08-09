@@ -123,9 +123,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
       ...prev,
       cooking: {
         recipeId,
-        stepIndex: -1,
+        stepIndex: -2,
         checkedIngredients: [],
         startedAt: Date.now(),
+        servings: 1,
       },
     }));
     setCookingModeOpen(true);

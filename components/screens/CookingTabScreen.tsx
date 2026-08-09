@@ -31,14 +31,20 @@ export function CookingTabScreen() {
   }
 
   const totalSteps = recipe.steps.length;
+  const onServings = session.stepIndex === -2;
+  const onIngredients = session.stepIndex === -1;
   const progressIndex = Math.max(session.stepIndex, 0);
-  const onIngredients = session.stepIndex < 0;
-  const pct = onIngredients
-    ? 5
-    : Math.round(((progressIndex + 1) / (totalSteps + 1)) * 100);
-  const stepLabel = onIngredients
-    ? "Gathering ingredients"
-    : `Step ${session.stepIndex + 1} of ${totalSteps}`;
+  const pct = onServings
+    ? 2
+    : onIngredients
+      ? 8
+      : Math.round(((progressIndex + 1) / (totalSteps + 1)) * 100);
+  const servings = session.servings || 1;
+  const stepLabel = onServings
+    ? "Picking servings"
+    : onIngredients
+      ? "Gathering ingredients"
+      : `Step ${session.stepIndex + 1} of ${totalSteps}`;
 
   return (
     <div className="mx-auto w-full max-w-lg px-4 py-4">
@@ -46,7 +52,11 @@ export function CookingTabScreen() {
         <RecipePlaceholder recipe={recipe} className="aspect-[16/10]" />
         <div className="space-y-4 p-5">
           <h2 className="font-display text-2xl font-bold text-ink">{recipe.title}</h2>
-          <p className="text-base font-semibold text-ink/75">{stepLabel}</p>
+          <p className="text-base font-semibold text-ink/75">
+            {stepLabel}
+            {" · "}
+            {servings} {servings === 1 ? "serving" : "servings"}
+          </p>
           <div className="h-4 overflow-hidden rounded-full bg-cream">
             <div
               className="h-full rounded-full bg-mint transition-all"

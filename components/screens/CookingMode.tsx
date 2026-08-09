@@ -1,12 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { StepTimer } from "@/components/StepTimer";
 import { StarRating } from "@/components/ui";
 import { useApp } from "@/lib/app-context";
 import { getRecipeById } from "@/lib/recipes";
+import { scaleIngredientName } from "@/lib/servings";
 import { COOKBOOKS, type CookbookId } from "@/lib/types";
 
 type Phase = "wizard" | "celebration" | "review";
+
+const SERVING_OPTIONS = [1, 2, 3, 4, 5, 6, 8];
 
 export function CookingMode() {
   const {
@@ -41,12 +45,20 @@ export function CookingMode() {
 
   if (!cookingModeOpen || !session || !recipe) return null;
 
+  const servings = session.servings || 1;
+  const baseServings = recipe.baseServings ?? 1;
   const totalSteps = recipe.steps.length;
-  const onIngredients = session.stepIndex < 0;
+  const onServings = session.stepIndex === -2;
+  const onIngredients = session.stepIndex === -1;
   const isLastStep = session.stepIndex === totalSteps - 1;
 
+  const scaledIngredients = recipe.ingredients.map((ing) => ({
+    ...ing,
+    name: scaleIngredientName(ing.name, servings, baseServings),
+  }));
+
   const stepIngredients = step
-    ? recipe.ingredients.filter((ing) => step.ingredientIds.includes(ing.id))
+    ? scaledIngredients.filter((ing) => step.ingredientIds.includes(ing.id))
     : [];
 
   const toggleIngredient = (id: string) => {
@@ -57,6 +69,10 @@ export function CookingMode() {
   };
 
   const goNext = () => {
+    if (onServings) {
+      updateCooking({ stepIndex: -1 });
+      return;
+    }
     if (onIngredients) {
       updateCooking({ stepIndex: 0 });
       return;
@@ -72,9 +88,15 @@ export function CookingMode() {
   };
 
   const goBack = () => {
-    if (session.stepIndex <= -1) return;
+    if (session.stepIndex <= -2) return;
     updateCooking({ stepIndex: session.stepIndex - 1 });
   };
+
+  const headerSub = onServings
+    ? "How many servings?"
+    : onIngredients
+      ? `Ingredients · ${servings} ${servings === 1 ? "serving" : "servings"}`
+      : `Step ${session.stepIndex + 1} of ${totalSteps} · ${servings} ${servings === 1 ? "serving" : "servings"}`;
 
   if (phase === "celebration") {
     return (
@@ -178,23 +200,55 @@ export function CookingMode() {
           <p className="truncate font-display text-lg font-bold text-ink">
             {recipe.title}
           </p>
-          <p className="text-sm font-semibold text-ink/65">
-            {onIngredients
-              ? "Ingredients"
-              : `Step ${session.stepIndex + 1} of ${totalSteps}`}
-          </p>
+          <p className="text-sm font-semibold text-ink/65">{headerSub}</p>
         </div>
       </header>
 
       <div className="mx-auto flex w-full max-w-lg flex-1 flex-col overflow-y-auto px-4 py-4">
+        {onServings ? (
+          <>
+            <h2 className="font-display text-2xl font-bold text-ink">
+              How many people?
+            </h2>
+            <p className="mt-1 text-ink/70">
+              We&apos;ll scale the ingredients so you can cook for more friends!
+            </p>
+            <div className="mt-6 grid grid-cols-4 gap-3">
+              {SERVING_OPTIONS.map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => updateCooking({ servings: n })}
+                  className={`flex min-h-16 flex-col items-center justify-center rounded-2xl border-2 text-xl font-bold ${
+                    servings === n
+                      ? "border-orange bg-orange text-white shadow-md"
+                      : "border-sun/50 bg-white text-ink"
+                  }`}
+                >
+                  {n}
+                </button>
+              ))}
+            </div>
+            <p className="mt-4 text-center text-base font-bold text-ink/70">
+              Making{" "}
+              <span className="text-orange-deep">
+                {servings} {servings === 1 ? "serving" : "servings"}
+              </span>
+            </p>
+          </>
+        ) : null}
+
         {onIngredients ? (
           <>
             <h2 className="font-display text-2xl font-bold text-ink">
               Check your ingredients
             </h2>
-            <p className="mt-1 text-ink/70">Tap each one when you have it ready.</p>
+            <p className="mt-1 text-ink/70">
+              Amounts are for {servings} {servings === 1 ? "serving" : "servings"}.
+              Tap each one when you have it ready.
+            </p>
             <ul className="mt-4 space-y-3">
-              {recipe.ingredients.map((ing) => {
+              {scaledIngredients.map((ing) => {
                 const checked = session.checkedIngredients.includes(ing.id);
                 return (
                   <li key={ing.id}>
@@ -215,7 +269,9 @@ export function CookingMode() {
               })}
             </ul>
           </>
-        ) : step ? (
+        ) : null}
+
+        {!onServings && !onIngredients && step ? (
           <>
             <div className="rounded-3xl bg-white p-5 shadow-md">
               <p className="text-xl font-bold leading-relaxed text-ink">
@@ -240,13 +296,21 @@ export function CookingMode() {
                 </ul>
               </div>
             ) : null}
+
+            {step.timerSeconds ? (
+              <StepTimer
+                seconds={step.timerSeconds}
+                label={step.timerLabel}
+                stepKey={`${recipe.id}-${step.id}`}
+              />
+            ) : null}
           </>
         ) : null}
       </div>
 
       <div className="safe-bottom border-t border-sun/40 bg-white px-4 pt-3 pb-4">
         <div className="mx-auto max-w-lg">
-          {!onIngredients && step?.needsAdult ? (
+          {!onServings && !onIngredients && step?.needsAdult ? (
             <div className="mb-3 rounded-2xl bg-orange/20 px-4 py-3 text-center">
               <p className="text-base font-bold text-orange-deep">
                 ⚠️ Ask an Adult Helper for help!
@@ -261,7 +325,7 @@ export function CookingMode() {
             <button
               type="button"
               onClick={goBack}
-              disabled={onIngredients}
+              disabled={onServings}
               className="min-h-14 min-w-[6.5rem] rounded-2xl bg-sun/50 text-base font-bold text-ink disabled:opacity-40"
             >
               ← Back
@@ -271,11 +335,13 @@ export function CookingMode() {
               onClick={goNext}
               className="min-h-14 flex-1 rounded-2xl bg-orange text-lg font-bold text-white shadow-md active:scale-[0.98]"
             >
-              {onIngredients
-                ? "Start cooking →"
-                : isLastStep
-                  ? "I'm Done! 🎉"
-                  : "Next Step →"}
+              {onServings
+                ? "Next: Ingredients →"
+                : onIngredients
+                  ? "Start cooking →"
+                  : isLastStep
+                    ? "I'm Done! 🎉"
+                    : "Next Step →"}
             </button>
           </div>
         </div>

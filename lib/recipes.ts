@@ -14,6 +14,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.35) 0 12%, transparent 13%)",
     suggestedCookbook: "breakfast",
+    baseServings: 1,
     imageSrc: "/recipes/no-bake-breakfast-balls.svg",
     ingredients: [
       { id: "oats", name: "1 cup oats" },
@@ -36,6 +37,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s3",
         instruction: "Put the bowl in the fridge for 20 minutes to make it firm.",
+        timerSeconds: 1200,
+        timerLabel: "Chill time",
         ingredientIds: [],
       },
       {
@@ -62,6 +65,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(180deg, rgba(255,255,255,0.3) 0 14px, transparent 14px 28px)",
     suggestedCookbook: "breakfast",
+    baseServings: 1,
     imageSrc: "/recipes/rainbow-yogurt-parfait.svg",
     ingredients: [
       { id: "yogurt", name: "1 cup vanilla yogurt" },
@@ -108,6 +112,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0 10px, transparent 10px 20px)",
     suggestedCookbook: "breakfast",
+    baseServings: 1,
     imageSrc: "/recipes/smores-overnight-oats.svg",
     ingredients: [
       { id: "oats", name: "1/2 cup oats" },
@@ -125,6 +130,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s2",
         instruction: "Put the lid on and leave it in the fridge overnight.",
+        timerSeconds: 300,
+        timerLabel: "Optional chill — or skip & wait overnight",
         ingredientIds: [],
       },
       {
@@ -151,6 +158,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 70% 30%, rgba(255,255,255,0.4) 0 14%, transparent 15%)",
     suggestedCookbook: "breakfast",
+    baseServings: 1,
     imageSrc: "/recipes/funny-face-toast.svg",
     ingredients: [
       { id: "bread", name: "1 slice of bread" },
@@ -201,6 +209,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(-20deg, rgba(255,255,255,0.25) 0 12px, transparent 12px 24px)",
     suggestedCookbook: "breakfast",
+    baseServings: 1,
     imageSrc: "/recipes/microwave-egg-sandwich.svg",
     ingredients: [
       { id: "egg", name: "1 egg" },
@@ -222,6 +231,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s3",
         instruction: "Ask an adult to microwave for 45–60 seconds until the egg is puffy.",
+        timerSeconds: 60,
+        timerLabel: "Microwave egg",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Microwaves and hot mugs need grown-up help!",
@@ -252,6 +263,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 40% 50%, rgba(255,255,255,0.35) 0 18%, transparent 19%)",
     suggestedCookbook: "breakfast",
+    baseServings: 1,
     imageSrc: "/recipes/magic-2-ingredient-pancakes.svg",
     ingredients: [
       { id: "banana", name: "1 ripe banana" },
@@ -271,6 +283,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s3",
         instruction: "Ask an adult to pour small circles onto a warm greased pan.",
+        timerSeconds: 120,
+        timerLabel: "Cook pancakes",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Hot stove cooking needs a grown-up!",
@@ -301,6 +315,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0 20%, transparent 21%)",
     suggestedCookbook: "dinner",
+    baseServings: 1,
     imageSrc: "/recipes/english-muffin-pizzas.svg",
     ingredients: [
       { id: "muffins", name: "2 English muffins" },
@@ -332,6 +347,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s5",
         instruction: "Ask an adult to bake at 375°F for 5–8 minutes until melty.",
+        timerSeconds: 360,
+        timerLabel: "Bake pizzas",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Ovens are hot — grown-up job!",
@@ -350,6 +367,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(90deg, rgba(255,255,255,0.25) 0 14px, transparent 14px 28px)",
     suggestedCookbook: "dinner",
+    baseServings: 1,
     imageSrc: "/recipes/walking-tacos.svg",
     ingredients: [
       { id: "chips", name: "1 small bag of corn chips" },
@@ -397,6 +415,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-radial-gradient(circle at 0 0, rgba(255,255,255,0.3) 0 8px, transparent 9px 20px)",
     suggestedCookbook: "dinner",
+    baseServings: 1,
     imageSrc: "/recipes/turkey-cheese-pinwheels.svg",
     ingredients: [
       { id: "tortilla", name: "1 large flour tortilla" },
@@ -446,6 +465,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 60% 40%, rgba(255,255,255,0.4) 0 16%, transparent 17%)",
     suggestedCookbook: "dinner",
+    baseServings: 1,
     imageSrc: "/recipes/microwave-mac-mug.svg",
     ingredients: [
       { id: "pasta", name: "1/2 cup macaroni pasta" },
@@ -463,6 +483,8 @@ export const RECIPES: Recipe[] = [
         id: "s2",
         instruction:
           "Ask an adult to microwave in 2-minute bursts until the pasta is soft.",
+        timerSeconds: 240,
+        timerLabel: "Cook pasta",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Hot mug and microwave — adult help!",
@@ -482,6 +504,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s5",
         instruction: "Let it cool for a minute before eating!",
+        timerSeconds: 60,
+        timerLabel: "Cool down",
         ingredientIds: [],
       },
     ],
@@ -498,6 +522,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 30% 40%, rgba(255,255,255,0.4) 0 12%, transparent 13%)",
     suggestedCookbook: "dinner",
+    baseServings: 1,
     imageSrc: "/recipes/super-simple-quesadillas.svg",
     ingredients: [
       { id: "tortilla", name: "1 flour tortilla" },
@@ -523,6 +548,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s4",
         instruction: "Ask an adult to cook in a warm pan 2 minutes per side.",
+        timerSeconds: 240,
+        timerLabel: "Quesadilla pan time",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Hot stove and pan!",
@@ -548,6 +575,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(135deg, rgba(255,255,255,0.2) 0 10px, transparent 10px 20px)",
     suggestedCookbook: "dinner",
+    baseServings: 1,
     imageSrc: "/recipes/diy-taco-bar.svg",
     ingredients: [
       { id: "shells", name: "Soft taco shells" },
@@ -598,6 +626,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(90deg, rgba(255,255,255,0.3) 0 8px, transparent 8px 16px)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/ants-on-a-log.svg",
     ingredients: [
       { id: "celery", name: "2 celery stalks" },
@@ -646,6 +675,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(180deg, rgba(255,255,255,0.25) 0 12px, transparent 12px 24px)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/fruit-kabobs-dip.svg",
     ingredients: [
       { id: "grapes", name: "Grapes" },
@@ -690,6 +720,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 40% 40%, rgba(255,200,100,0.35) 0 15%, transparent 16%)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/rice-krispie-treats.svg",
     ingredients: [
       { id: "cereal", name: "3 cups Rice Krispies cereal" },
@@ -700,6 +731,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s1",
         instruction: "Ask an adult to melt butter and marshmallows until gooey.",
+        timerSeconds: 90,
+        timerLabel: "Melt marshmallows",
         ingredientIds: ["butter", "mallows"],
         needsAdult: true,
         adultReason: "Melting on stove or microwave is hot!",
@@ -722,6 +755,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s5",
         instruction: "Let it cool, then ask an adult to cut into squares!",
+        timerSeconds: 600,
+        timerLabel: "Cooling time",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Cutting squares needs a knife!",
@@ -740,6 +775,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35) 0 6px, transparent 7px 16px)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/puppy-chow.svg",
     ingredients: [
       { id: "cereal", name: "4 cups Chex cereal" },
@@ -751,6 +787,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s1",
         instruction: "Ask an adult to melt chocolate and peanut butter in the microwave.",
+        timerSeconds: 30,
+        timerLabel: "Melt chocolate",
         ingredientIds: ["chips", "pb"],
         needsAdult: true,
         adultReason: "Hot melted chocolate needs adult help!",
@@ -789,6 +827,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(45deg, rgba(255,150,200,0.2) 0 10px, transparent 10px 20px)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/frozen-banana-lollies.svg",
     ingredients: [
       { id: "bananas", name: "2 bananas" },
@@ -820,6 +859,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s5",
         instruction: "Freeze on a tray until hard like ice cream!",
+        timerSeconds: 3600,
+        timerLabel: "Freeze time",
         ingredientIds: [],
       },
     ],
@@ -836,6 +877,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 50% 60%, rgba(0,0,0,0.15) 0 30%, transparent 31%)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/dirt-cake-worms.svg",
     ingredients: [
       { id: "pudding", name: "1 cup chocolate pudding" },
@@ -877,6 +919,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 50% 50%, rgba(255,255,255,0.35) 0 18%, transparent 19%)",
     suggestedCookbook: "dessert",
+    baseServings: 1,
     imageSrc: "/recipes/apple-doughnuts.svg",
     ingredients: [
       { id: "apple", name: "1 apple" },
@@ -920,6 +963,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 0 8px, transparent 9px 20px)",
     suggestedCookbook: "drinks",
+    baseServings: 1,
     imageSrc: "/recipes/strawberry-banana-smoothie.svg",
     ingredients: [
       { id: "banana", name: "1 banana" },
@@ -941,6 +985,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s3",
         instruction: "Ask an adult to blend until smooth and pink.",
+        timerSeconds: 30,
+        timerLabel: "Blend smoothie",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Blenders are loud and need adult hands!",
@@ -964,6 +1010,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(45deg, rgba(255,255,255,0.35) 0 12px, transparent 12px 24px)",
     suggestedCookbook: "drinks",
+    baseServings: 1,
     imageSrc: "/recipes/fresh-lemonade.svg",
     ingredients: [
       { id: "lemons", name: "2 lemons" },
@@ -1013,6 +1060,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 50% 30%, rgba(255,255,255,0.45) 0 20%, transparent 21%)",
     suggestedCookbook: "drinks",
+    baseServings: 1,
     imageSrc: "/recipes/cozy-hot-cocoa.svg",
     ingredients: [
       { id: "milk", name: "1 cup milk" },
@@ -1039,6 +1087,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s4",
         instruction: "Ask an adult to microwave about 1 minute until warm.",
+        timerSeconds: 60,
+        timerLabel: "Warm cocoa",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Hot drinks and microwaves need adult help!",
@@ -1062,6 +1112,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(180deg, rgba(255,255,255,0.35) 0 10px, transparent 10px 20px)",
     suggestedCookbook: "drinks",
+    baseServings: 1,
     imageSrc: "/recipes/fancy-fruit-water.svg",
     ingredients: [
       { id: "water", name: "2 cups water" },
@@ -1088,6 +1139,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s4",
         instruction: "Let it sit a few minutes so the water tastes like fruit.",
+        timerSeconds: 180,
+        timerLabel: "Flavor soak",
         ingredientIds: [],
       },
       {
@@ -1109,6 +1162,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "radial-gradient(circle at 30% 70%, rgba(255,255,255,0.35) 0 10%, transparent 11%)",
     suggestedCookbook: "drinks",
+    baseServings: 1,
     imageSrc: "/recipes/sparkling-fruit-punch.svg",
     ingredients: [
       { id: "orange", name: "1 cup orange juice" },
@@ -1150,6 +1204,7 @@ export const RECIPES: Recipe[] = [
     pattern:
       "repeating-linear-gradient(-30deg, rgba(255,255,255,0.2) 0 10px, transparent 10px 20px)",
     suggestedCookbook: "drinks",
+    baseServings: 1,
     imageSrc: "/recipes/chocolate-milkshake.svg",
     ingredients: [
       { id: "icecream", name: "2 scoops vanilla ice cream" },
@@ -1165,6 +1220,8 @@ export const RECIPES: Recipe[] = [
       {
         id: "s2",
         instruction: "Ask an adult to blend on high for about 30 seconds.",
+        timerSeconds: 30,
+        timerLabel: "Blend shake",
         ingredientIds: [],
         needsAdult: true,
         adultReason: "Blenders need adult hands!",

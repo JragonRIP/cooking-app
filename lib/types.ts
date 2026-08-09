@@ -15,6 +15,9 @@ export interface Step {
   ingredientIds: string[];
   needsAdult?: boolean;
   adultReason?: string;
+  /** Optional countdown timer for this step (skippable in the UI) */
+  timerSeconds?: number;
+  timerLabel?: string;
 }
 
 export interface Recipe {
@@ -29,6 +32,8 @@ export interface Recipe {
   suggestedCookbook: CookbookId;
   /** Simple illustration in /public/recipes */
   imageSrc?: string;
+  /** Default batch size for scaling ingredients */
+  baseServings?: number;
   ingredients: Ingredient[];
   steps: Step[];
 }
@@ -46,12 +51,13 @@ export interface RecipeReview {
   updatedAt: number;
 }
 
-/** stepIndex: -1 = ingredient checklist screen; 0+ = recipe steps */
+/** stepIndex: -2 = servings; -1 = ingredients; 0+ = recipe steps */
 export interface CookingSession {
   recipeId: string;
   stepIndex: number;
   checkedIngredients: string[];
   startedAt: number;
+  servings: number;
 }
 
 export interface AppPersistState {
