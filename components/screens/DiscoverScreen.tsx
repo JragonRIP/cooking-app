@@ -22,10 +22,10 @@ function DiscoverCard({ recipe }: { recipe: Recipe }) {
   const [pop, setPop] = useState(false);
 
   return (
-    <article className="flex h-full w-full flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_12px_32px_rgba(60,40,10,0.15)]">
+    <article className="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[28px] bg-white shadow-[0_12px_32px_rgba(60,40,10,0.15)]">
       <RecipePlaceholder
         recipe={recipe}
-        className="relative min-h-[42%] flex-1 basis-0"
+        className="discover-card-image relative min-h-[42%] flex-1 basis-0"
         large
       />
       <div className="flex shrink-0 flex-col gap-2 p-3 pb-4 sm:gap-2.5 sm:p-4">
@@ -36,7 +36,7 @@ function DiscoverCard({ recipe }: { recipe: Recipe }) {
           <CookTimeBadge mins={recipe.cookTimeMins} />
           <SafetyBadge safety={recipe.safety} />
         </div>
-        <div className="line-clamp-3 rounded-2xl bg-cream px-3 py-2.5 text-sm leading-snug text-ink/85 sm:text-base">
+        <div className="discover-card-desc line-clamp-3 rounded-2xl bg-cream px-3 py-2.5 text-sm leading-snug text-ink/85 sm:text-base">
           {recipe.description}
         </div>
         <div className="mt-0.5 flex gap-3">

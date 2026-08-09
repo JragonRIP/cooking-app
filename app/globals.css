@@ -70,6 +70,30 @@ html {
   scroll-snap-stop: always;
 }
 
+/* Smaller food art on short phones so title + buttons stay on screen */
+@media (max-height: 740px) {
+  .discover-card-image {
+    flex: 0 0 auto !important;
+    min-height: 0 !important;
+    height: 28vh;
+    max-height: 160px;
+  }
+}
+
+@media (max-height: 640px) {
+  .discover-card-image {
+    height: 22vh;
+    max-height: 120px;
+  }
+
+  .discover-card-desc {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+
 @keyframes confetti-fall {
   0% {
     transform: translateY(-10vh) rotate(0deg);
