@@ -34,8 +34,8 @@ export function ToastBanner() {
   const { toast } = useApp();
   if (!toast) return null;
   return (
-    <div className="pointer-events-none fixed left-1/2 top-[max(0.75rem,env(safe-area-inset-top))] z-[90] w-[min(92%,360px)] -translate-x-1/2">
-      <div className="toast-pop rounded-2xl bg-ink px-3 py-2.5 text-center text-sm font-bold text-white shadow-lg sm:px-4 sm:py-3 sm:text-base">
+    <div className="pointer-events-none fixed left-1/2 top-4 z-[90] w-[min(92%,360px)] -translate-x-1/2">
+      <div className="toast-pop rounded-2xl bg-ink px-4 py-3 text-center text-base font-bold text-white shadow-lg">
         {toast.message}
       </div>
     </div>
@@ -46,22 +46,22 @@ export function SwitchRecipeModal() {
   const { switchPrompt, dismissSwitchPrompt, confirmSwitchCooking } = useApp();
   if (!switchPrompt) return null;
   return (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-ink/40 p-3 short:p-2 sm:items-center sm:p-4">
-      <div className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-3xl bg-white p-4 shadow-xl short:p-3 sm:p-5">
-        <h2 className="font-display text-lg font-bold text-ink sm:text-xl">Switch recipes?</h2>
-        <p className="mt-2 text-sm text-ink/80 sm:text-base">{switchPrompt}</p>
-        <div className="mt-4 flex flex-col gap-2 sm:mt-5 sm:gap-3">
+    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-ink/40 p-4 sm:items-center">
+      <div className="w-full max-w-md rounded-3xl bg-white p-5 shadow-xl">
+        <h2 className="font-display text-xl font-bold text-ink">Switch recipes?</h2>
+        <p className="mt-2 text-base text-ink/80">{switchPrompt}</p>
+        <div className="mt-5 flex flex-col gap-3">
           <button
             type="button"
             onClick={confirmSwitchCooking}
-            className="min-h-12 rounded-2xl bg-orange text-base font-bold text-white shadow-md active:scale-[0.98] short:min-h-11 sm:min-h-14 sm:text-lg"
+            className="min-h-14 rounded-2xl bg-orange text-lg font-bold text-white shadow-md active:scale-[0.98]"
           >
             Yes, switch
           </button>
           <button
             type="button"
             onClick={dismissSwitchPrompt}
-            className="min-h-11 rounded-2xl bg-sun/40 text-sm font-bold text-ink active:scale-[0.98] short:min-h-10 sm:min-h-12 sm:text-base"
+            className="min-h-12 rounded-2xl bg-sun/40 text-base font-bold text-ink active:scale-[0.98]"
           >
             Keep cooking current
           </button>

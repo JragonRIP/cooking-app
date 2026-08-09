@@ -42,7 +42,7 @@ export function SavedScreen() {
   }
 
   return (
-    <div className="mx-auto grid w-full max-w-lg grid-cols-2 gap-2 px-3 py-3 short:gap-1.5 short:px-2 short:py-2 sm:gap-3 sm:px-4 sm:py-4">
+    <div className="mx-auto grid w-full max-w-lg grid-cols-2 gap-3 px-4 py-4">
       {recipes.map((recipe) => (
         <article
           key={recipe.id}
