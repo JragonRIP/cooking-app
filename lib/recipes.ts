@@ -1,7 +1,8 @@
 import type { Recipe } from "./types";
+import { MORE_RECIPES } from "./more-recipes";
 
 /** Mini-chef recipes for Discover */
-export const RECIPES: Recipe[] = [
+const BASE_RECIPES: Recipe[] = [
   {
     id: "no-bake-breakfast-balls",
     title: "No-Bake Breakfast Balls",
@@ -1239,6 +1240,8 @@ export const RECIPES: Recipe[] = [
     ],
   },
 ];
+
+export const RECIPES: Recipe[] = [...BASE_RECIPES, ...MORE_RECIPES];
 
 export function getRecipeById(id: string): Recipe | undefined {
   return RECIPES.find((r) => r.id === id);
